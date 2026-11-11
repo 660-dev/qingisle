@@ -317,7 +317,7 @@ docker compose up -d --build
 
 - **业务后端未 Python 化**：除聊天室 WebSocket 外，登录注册、计划 / 待办 / 打卡、知识库 RAG、Agent、OSS 预签名仍在 Next.js `/api`。
 - **Python sidecar 未容器化**：见上节，生产 Docker 部署当前仍跑 Node sidecar。
-- **占位信息待填**：`src/config/brand.ts` 与 `docs/RESUME.md` 中的 GitHub 用户名、仓库名、演示站 URL 仍为占位（`YOUR_GITHUB_USER` / `YOUR_DEMO_URL`），发布前替换为真实值。
+- **演示站地址待填**：`src/config/brand.ts` 与 `docs/RESUME.md`、README 顶部的演示站链接仍为占位（`YOUR_DEMO_URL`），公网部署出真实地址后替换；GitHub 仓库链接已指向 `660-dev/qingisle`。
 - **沿用原项目路线图**：HTTPS 上线（域名 + Let's Encrypt）、邮件自助找回密码（SMTP）、数据库定期自动备份、更多场景主题与环境音。
 
 ## ❓ 常见问题

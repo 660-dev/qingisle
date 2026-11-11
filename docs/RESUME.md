@@ -3,7 +3,7 @@
 基于开源项目 https://github.com/gdut4140/summer-checkin （MIT，已获作者允许）二次开发。
 
 - 演示站：https://YOUR_DEMO_URL
-- 仓库：https://github.com/YOUR_GITHUB_USER/qingisle
+- 仓库：https://github.com/660-dev/qingisle
 
 ## 简历条目
 
