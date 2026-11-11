@@ -8,8 +8,8 @@ import { SceneProvider } from "@/context/scene-context";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Summer Checkin AI - 智能学习打卡平台",
-  description: "记录假期学习之旅，用打卡、计划、数据与 AI 建立稳定的成长节奏。",
+  title: "青屿 QingIsle - 智能学习打卡平台",
+  description: "用打卡、计划、专注和 AI，把学习节奏做成看得见的岛屿。",
 };
 
 export default function RootLayout({
@@ -42,7 +42,7 @@ export default function RootLayout({
                 {children}
               </ClickSpark>
             </div>
-            <Toaster closeButton />
+            <Toaster closeButton richColors position="top-center" />
           </ThemeProvider>
         </SceneProvider>
       </body>

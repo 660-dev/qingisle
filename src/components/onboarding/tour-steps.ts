@@ -42,7 +42,7 @@ export const TOUR_VERSION = "v2";
 export const TOUR_SEGMENTS: Record<string, TourStepConfig[]> = {
   "/dashboard": [
     {
-      title: "欢迎来到 Summer Checkin 🌱",
+      title: "欢迎来到 青屿 🌱",
       description:
         "打卡 · 计划 · 阅读 · 专注——一个把学习节奏收拢到一起的栖息地。用几步带你逛一圈，马上就能上手。",
     },
@@ -57,7 +57,7 @@ export const TOUR_SEGMENTS: Record<string, TourStepConfig[]> = {
     {
       title: "聊天室",
       description:
-        "顶栏右边那个实心彩色圆按钮就是聊天室入口——进去是多人实时群聊，在输入框 @AI 还能把温柔宝 / 嘴欠宝叫出来陪你聊天。",
+        "顶栏右边那个实心彩色圆按钮就是聊天室入口——进去是多人实时群聊，在输入框 @AI 还能把青青 / 屿屿叫出来陪你聊天。",
       selector: '[data-tour="chatroom-entry"]',
       side: "bottom",
     },

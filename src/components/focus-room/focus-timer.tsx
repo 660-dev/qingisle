@@ -68,7 +68,7 @@ function load(): TimerSnapshot | null {
       !Number.isFinite(snapshot.focusMinutes) || Number(snapshot.focusMinutes) <= 0 ||
       !Number.isFinite(snapshot.breakMinutes) || Number(snapshot.breakMinutes) <= 0 ||
       typeof snapshot.isRunning !== "boolean" ||
-      !Number.isInteger(snapshot.remaining) || Number(snapshot.remaining) < 0 ||
+       !Number.isFinite(Number(snapshot.remaining)) || Number(snapshot.remaining) < 0 ||
       (expiresAt !== undefined && expiresAt !== null && !Number.isFinite(expiresAt))
     ) return null;
 
@@ -438,13 +438,12 @@ export const FocusTimer = forwardRef<PomodoroHandle, FocusTimerProps>(function F
         </Tooltip>
         <Tooltip>
           <TooltipTrigger render={
-            <button onClick={() => {
+            <button type="button" onClick={() => {
               if (isRunning) {
                 pause();
-              } else if (!immersive && onStart) {
-                onStart();
               } else {
                 start();
+                if (!immersive && onStart) onStart();
               }
             }}
               className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl shadow-primary/25 transition-all hover:scale-105 active:scale-95"

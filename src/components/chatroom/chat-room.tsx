@@ -38,7 +38,7 @@ interface ChatMessage {
   role: "user" | "assistant" | "system";
   content: string;
   createdAt: string;
-  /** 两个雨宝：gentle = 温柔宝（粉色头像），snarky = 嘴欠宝（雨宝） */
+  /** 两个屿助手：gentle = 青青（粉色头像），snarky = 屿屿（屿助手） */
   aiRole?: "gentle" | "snarky";
   /** 引用回复：被引用消息快照；普通消息为 null */
   replyTo?: ReplyTo | null;
@@ -54,13 +54,13 @@ type ServerMessage =
   | { type: "pong" }
   | { type: "error"; code: string; reason: string };
 
-// 两个雨宝当成两个不同"用户"：固定的虚拟 userId，消息按各自用户分组渲染
+// 两个屿助手当成两个不同"用户"：固定的虚拟 userId，消息按各自用户分组渲染
 const AI_IDS = { gentle: "ai-gentle", snarky: "ai-snarky" } as const;
 
 function getWsUrl(): string {
   const host = window.location.hostname;
   const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-  if (window.location.port === "3000") return `ws://${host}:3001/ws`;
+  if (["3000", "3100", "3002"].includes(window.location.port)) return `ws://${host}:3001/ws`;
   return `${protocol}//${window.location.host}/ws`;
 }
 
@@ -80,9 +80,9 @@ function findActiveMention(value: string, caret: number): number | null {
 }
 
 function senderKey(m: ChatMessage): string {
-  // 温柔宝/嘴欠宝按各自虚拟用户分组，当成两个不同用户，不互相合并
+  // 青青/屿屿按各自虚拟用户分组，当成两个不同用户，不互相合并
   if (m.role === "assistant") {
-    const isGentle = m.userId === AI_IDS.gentle || m.userName === "温柔宝";
+    const isGentle = m.userId === AI_IDS.gentle || m.userName === "青青";
     return isGentle ? "ai:gentle" : "ai:snarky";
   }
   if (m.role === "system") return "sys";
@@ -178,11 +178,11 @@ export function ChatRoom() {
             const isGentle =
               m.userId === AI_IDS.gentle ||
               m.aiRole === "gentle" ||
-              m.user?.name === "温柔宝";
+              m.user?.name === "青青";
             return {
               id: m.id,
               userId: m.userId ?? (isGentle ? AI_IDS.gentle : AI_IDS.snarky),
-              userName: isGentle ? "温柔宝" : "嘴欠宝",
+              userName: isGentle ? "青青" : "屿屿",
               image: m.user?.image ?? null,
               role,
               content: m.content,
@@ -267,13 +267,13 @@ export function ChatRoom() {
       case "ai:start":
         if (openRef.current) {
           const aiRole = msg.aiRole ?? "snarky";
-          // 每个 AI 请求一个独立占位气泡（id=requestId），支持同时 @ 两个雨宝各自流式
+          // 每个 AI 请求一个独立占位气泡（id=requestId），支持同时 @ 两个屿助手各自流式
           setMessages((prev) => [
             ...prev,
             {
               id: msg.requestId,
               userId: AI_IDS[aiRole],
-              userName: aiRole === "gentle" ? "温柔宝" : "嘴欠宝",
+              userName: aiRole === "gentle" ? "青青" : "屿屿",
               image: null,
               role: "assistant",
               aiRole,
@@ -300,7 +300,7 @@ export function ChatRoom() {
             : {
                 ...msg.message,
                 userId:
-                  msg.message.userName === "温柔宝" ? AI_IDS.gentle : AI_IDS.snarky,
+                  msg.message.userName === "青青" ? AI_IDS.gentle : AI_IDS.snarky,
               };
           setMessages((prev) => {
             // 该消息已在列表（历史快照拉到）：只移除占位，避免同 id 重复
@@ -506,7 +506,7 @@ export function ChatRoom() {
 
   function selectMention(target: "gentle" | "snarky") {
     if (mentionAt === null) return;
-    const mention = target === "gentle" ? "@温柔宝" : "@嘴欠宝";
+    const mention = target === "gentle" ? "@青青" : "@屿屿";
     const insertAt = mentionAt;
     setInput((prev) => {
       if (prev[insertAt] !== "@") return prev;
@@ -555,7 +555,7 @@ export function ChatRoom() {
         >
           <DialogTitle className="sr-only">学习聊天室</DialogTitle>
           <DialogDescription className="sr-only">
-            多人实时聊天，@雨宝 唤起 雨宝
+            多人实时聊天，@屿助手 唤起 屿助手
           </DialogDescription>
 
           {/* 头部 */}
@@ -623,16 +623,16 @@ export function ChatRoom() {
                       开始聊天吧
                     </h3>
                     <p className="mt-1.5 max-w-xs text-sm leading-6 text-muted-foreground">
-                      和伙伴一起交流，输入 @ 唤起嘴欠宝 / 温柔宝
+                      和伙伴一起交流，输入 @ 唤起屿屿 / 青青
                     </p>
                     <button
                       onClick={() => {
-                        setInput("@温柔宝 ");
+                        setInput("@青青 ");
                         inputRef.current?.focus();
                       }}
                       className="mt-4 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/15"
                     >
-                      @温柔宝 提问
+                      @青青 提问
                     </button>
                   </div>
                 ) : (
@@ -703,7 +703,7 @@ export function ChatRoom() {
                           <Sparkle className="size-4" weight="fill" />
                         </span>
                         <span className="text-left">
-                          <span className="block text-xs font-medium text-foreground">温柔宝</span>
+                          <span className="block text-xs font-medium text-foreground">青青</span>
                           <span className="block text-[10px] text-muted-foreground">温柔版</span>
                         </span>
                         {mentionIndex === 0 && <ArrowRight className="ml-1 size-3 shrink-0 text-primary" />}
@@ -728,7 +728,7 @@ export function ChatRoom() {
                           <Sparkle className="size-4" weight="fill" />
                         </span>
                         <span className="text-left">
-                          <span className="block text-xs font-medium text-foreground">嘴欠宝</span>
+                          <span className="block text-xs font-medium text-foreground">屿屿</span>
                           <span className="block text-[10px] text-muted-foreground">嘴欠版</span>
                         </span>
                         {mentionIndex === 1 && <ArrowRight className="ml-1 size-3 shrink-0 text-primary" />}
@@ -807,7 +807,7 @@ export function ChatRoom() {
                         }
                       }}
                       rows={1}
-                      placeholder="说点什么… 输入 @ 唤起嘴欠宝 / 温柔宝"
+                      placeholder="说点什么… 输入 @ 唤起屿屿 / 青青"
                       className="max-h-32 min-h-6 flex-1 resize-none border-0 bg-transparent py-1.5 text-sm text-foreground outline-none placeholder:text-muted-foreground/60"
                     />
                     <Tooltip>
@@ -948,7 +948,7 @@ function MessageRow({
   }
 
   const isAI = message.role === "assistant";
-  const isGentle = isAI && (message.aiRole === "gentle" || message.userName === "温柔宝");
+  const isGentle = isAI && (message.aiRole === "gentle" || message.userName === "青青");
   const isStreaming = message.id.startsWith("ai-");
 
   return (
@@ -978,7 +978,7 @@ function MessageRow({
           }>
             <Sparkle className="size-[20px]" weight="fill" />
           </TooltipTrigger>
-          <TooltipContent>{isGentle ? "温柔宝" : "嘴欠宝"}</TooltipContent>
+          <TooltipContent>{isGentle ? "青青" : "屿屿"}</TooltipContent>
         </Tooltip>
       ) : (
         <AppAvatar
@@ -1006,7 +1006,7 @@ function MessageRow({
           >
             {isAI ? (
               <span className={cn("text-xs font-semibold", isGentle ? "text-pink-400" : "text-primary")}>
-                {isGentle ? "温柔宝" : "嘴欠宝"}
+                {isGentle ? "青青" : "屿屿"}
               </span>
             ) : (
               <span className="text-xs font-medium text-foreground/80">

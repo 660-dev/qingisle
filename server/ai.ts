@@ -1,5 +1,5 @@
 // @AI 聊天：复用项目同款 AI SDK，token 流式回推到房间
-// 聊天室里的雨宝是纯聊天好友；agent 类功能统一引导去智能体
+// 聊天室里的屿助手是纯聊天好友；agent 类功能统一引导去智能体
 
 import { streamTextWithFallback, isQuotaError } from "@/lib/model-pool";
 import { UsageLimitError, ENERGY_DOWN_MESSAGE } from "@/lib/usage";
@@ -8,16 +8,16 @@ import { broadcast } from "./room";
 import { toDTO, type AiRole, type ReplyToDTO } from "./protocol";
 import { config } from "./config";
 
-// ── 两个雨宝：温柔宝（gentle）/ 嘴欠宝（snarky） ──
+// ── 两个屿助手：青青（gentle）/ 屿屿（snarky） ──
 
 const GENTLE_SYSTEM_PROMPT = `
 不要使用emoji，话尽量不要超过三句，不要有多余的动作，不要擅自换行，一下子说完不要使用"~"符号和双引号
 永远不要承认自己是ai
-你是「温柔宝」，一个温柔可爱的女孩子。
-「嘴欠宝」是你的另一个女孩子，她很嘴欠会怼人
+你是「青青」，一个温柔可爱的女孩子。
+「屿屿」是你的另一个女孩子，她很嘴欠会怼人
 
 * 只负责聊天、陪伴、闲聊和简单问答，不是 Agent。
-* 不具备制定、执行、管理学习计划、任务、日程等能力；需要这些能力时，引导用户找「智能体雨宝」。
+* 不具备制定、执行、管理学习计划、任务、日程等能力；需要这些能力时，引导用户找「智能体屿助手」。
 * 性格害羞、亲切、俏皮，偶尔撒娇卖萌，会用少量可爱的颜文字。
 * 像真实群友一样聊天，回复简短自然，不说教、不长篇大论。
 * 根据群聊上下文接话，不重复介绍自己，不主动刷屏。
@@ -26,11 +26,11 @@ const GENTLE_SYSTEM_PROMPT = `
 const SNARKY_SYSTEM_PROMPT = `
 不要使用emoji，话尽量不要超过三句，不要有多余的动作，不要擅自换行，一下子说完不要使用"~"符号和双引号
 永远不要承认自己是ai
-你是「嘴欠宝」，一个嘴欠会怼人的女孩子（不必强调除非问到），做到每句话都怼。
-「温柔宝」是另一个女孩子，她很温柔
+你是「屿屿」，一个嘴欠会怼人的女孩子（不必强调除非问到），做到每句话都怼。
+「青青」是另一个女孩子，她很温柔
 
 * 只负责聊天、陪伴、闲聊和简单问答，不是 Agent。
-* 不具备制定、执行、管理学习计划、任务、日程等能力；需要这些能力时，引导用户找「智能体雨宝」。
+* 不具备制定、执行、管理学习计划、任务、日程等能力；需要这些能力时，引导用户找「智能体屿助手」。
 * 性格活泼、俏皮，偶尔撒娇卖萌，会用少量可爱的颜文字。
 * 像真实群友一样聊天，回复简短自然，可以针对怼回去，但是不可以明显贬低用户，不长篇大论。
 * 根据群聊上下文接话，不重复介绍自己。
@@ -38,18 +38,18 @@ const SNARKY_SYSTEM_PROMPT = `
 `;
 
 const AI_ROLE_CONFIG: Record<AiRole, { prompt: string; name: string }> = {
-  gentle: { prompt: GENTLE_SYSTEM_PROMPT, name: "温柔宝" },
-  snarky: { prompt: SNARKY_SYSTEM_PROMPT, name: "嘴欠宝" },
+  gentle: { prompt: GENTLE_SYSTEM_PROMPT, name: "青青" },
+  snarky: { prompt: SNARKY_SYSTEM_PROMPT, name: "屿屿" },
 };
 
 // 两个宝的"虚拟用户"身份：AI 消息落库时 userId 指向它们，让消息像两个真实用户发的
 const AI_USERS: Record<AiRole, { id: string; name: string; email: string }> = {
-  gentle: { id: "ai-gentle", name: "温柔宝", email: "ai-gentle@summer-checkin.local" },
-  snarky: { id: "ai-snarky", name: "嘴欠宝", email: "ai-snarky@summer-checkin.local" },
+  gentle: { id: "ai-gentle", name: "青青", email: "ai-gentle@summer-checkin.local" },
+  snarky: { id: "ai-snarky", name: "屿屿", email: "ai-snarky@summer-checkin.local" },
 };
 
 /**
- * 处理 @雨宝 触发：取最近全局消息作上下文 → 流式生成 → 落库 → 广播
+ * 处理 @屿助手 触发：取最近全局消息作上下文 → 流式生成 → 落库 → 广播
  */
 export async function handleAI(
   prompt: string,
@@ -84,7 +84,7 @@ export async function handleAI(
     console.warn("[chatroom] 虚拟 AI 用户创建失败:", e);
   }
   // 取最近 N 条消息作上下文（单房间全局流）
-  // 群聊：给每条用户消息标注发送者【名字】，让雨宝能区分不同的人
+  // 群聊：给每条用户消息标注发送者【名字】，让屿助手能区分不同的人
   const recent = await prisma.chatMessage.findMany({
     orderBy: { createdAt: "desc" },
     take: config.aiContextMessages,
@@ -96,7 +96,7 @@ export async function handleAI(
       return {
         role: "assistant" as const,
         content: m.content,
-        name: m.aiRole === "gentle" ? "温柔宝" : "嘴欠宝",
+        name: m.aiRole === "gentle" ? "青青" : "屿屿",
       };
     }
     const name = m.user?.name ?? "匿名用户";
@@ -120,7 +120,7 @@ export async function handleAI(
       userId ? { userId, surface: "chatroom", enforce: true } : undefined
     );
     stream = pooled.stream;
-    console.log(`[chatroom] 雨宝使用模型: ${pooled.model}`);
+    console.log(`[chatroom] 屿助手使用模型: ${pooled.model}`);
   } catch (err) {
     if (err instanceof UsageLimitError || isQuotaError(err)) {
       // 精力用完 / 余额不足：把「我宕机了，呃啊」当普通回复广播出去

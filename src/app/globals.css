@@ -1502,7 +1502,7 @@
   background: color-mix(in srgb, var(--primary-foreground) 12%, transparent);
 }
 
-/* ── 雨宝精力条 ── */
+/* ── 屿助手精力条 ── */
 .energy-fill {
   background: linear-gradient(
     90deg,

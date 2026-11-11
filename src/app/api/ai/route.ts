@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
     // 最近对话摘要：createPlan 后台生成计划文档时作为个性化上下文（截断，控制成本）
     const conversationHint = truncatedMessages
       .slice(-6)
-      .map((m) => `${m.role === "user" ? "用户" : "雨宝"}: ${m.content.slice(0, 200)}`)
+      .map((m) => `${m.role === "user" ? "用户" : "屿助手"}: ${m.content.slice(0, 200)}`)
       .join("\n");
 
     // ============================================================
@@ -312,7 +312,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     // 每日精力用完（UsageLimitError）或余额/配额不足（isQuotaError）：
-    // 统一流式返回「我宕机了，呃啊」，前端照常渲染为雨宝的回复
+    // 统一流式返回「我宕机了，呃啊」，前端照常渲染为屿助手的回复
     if (error instanceof UsageLimitError || isQuotaError(error)) {
       return limitStreamResponse(ENERGY_DOWN_MESSAGE);
     }
@@ -324,7 +324,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/** 把一段文本包装成流式响应（雨宝没精力时的友好提示） */
+/** 把一段文本包装成流式响应（屿助手没精力时的友好提示） */
 function limitStreamResponse(message: string) {
   const stream = new ReadableStream<string>({
     start(controller) {

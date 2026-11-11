@@ -92,11 +92,11 @@ export function TopNav({ user }: TopNavProps) {
     <>
       <header className="dashboard-nav pointer-events-none sticky top-0 z-40 w-full text-white">
         <div className="dashboard-nav__inner mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-4 px-4 md:px-8">
-          <Link href="/dashboard" className="pointer-events-auto flex items-center gap-2 rounded-full border border-white/12 bg-[var(--surface-nav-bg)] p-1.5 pr-3 text-xs font-semibold shadow-xl backdrop-blur-2xl lg:hidden"><span className="flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground"><Leaf className="size-3.5" weight="fill" /></span>Summer Checkin</Link>
+          <Link href="/dashboard" className="pointer-events-auto flex items-center gap-2 rounded-full border border-white/12 bg-[var(--surface-nav-bg)] p-1.5 pr-3 text-xs font-semibold shadow-xl backdrop-blur-2xl lg:hidden"><span className="flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground"><Leaf className="size-3.5" weight="fill" /></span>青屿</Link>
           <div className="atomic-nav pointer-events-auto hidden items-center lg:flex">
             <Link href="/dashboard" className="atomic-nav__brand flex shrink-0 items-center gap-2.5">
               <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground"><Leaf className="size-4" weight="fill" /></span>
-              <span className="whitespace-nowrap text-sm font-semibold">Summer Checkin</span>
+              <span className="whitespace-nowrap text-sm font-semibold">青屿</span>
             </Link>
             <nav className="atomic-nav__links flex items-center gap-1 justify-around" aria-label="主导航">
               {mainNav.map((item) => (

@@ -5,6 +5,7 @@ import { CalendarCheck, ChartLineUp, Star, Lightning, CheckCircle } from "@phosp
 import { ProfileHeader } from "@/components/profile/profile-header";
 import { FocusDurationChart, type FocusDay } from "@/components/profile/focus-duration-chart";
 import { YubaoEnergy } from "@/components/profile/yubao-energy";
+import { WeeklyExportButton } from "@/components/profile/weekly-export-button";
 
 export default async function ProfilePage() {
   const user = await requireAuth();
@@ -95,6 +96,8 @@ export default async function ProfilePage() {
 
   return (
     <div className="product-page product-page--redesigned space-y-6">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0 flex-1">
       <ProfileHeader
         user={{
           name: fullUser?.name ?? user.name,
@@ -104,6 +107,9 @@ export default async function ProfilePage() {
           createdAt: fullUser?.createdAt ?? new Date(),
         }}
       />
+        </div>
+        <WeeklyExportButton />
+      </div>
 
       {/* 概览 */}
       <section className="product-metrics grid grid-cols-1 sm:grid-cols-3">
@@ -141,7 +147,7 @@ export default async function ProfilePage() {
             <span className="text-xs font-medium text-white/72">今日动态</span>
             {todayDone > 0 ? <CheckCircle className="size-5 text-primary" weight="fill" /> : <Star className="size-5 text-primary" weight="duotone" />}
           </div>
-          {/* 雨宝精力条：填满卡片中部空白 */}
+          {/* 屿助手精力条：填满卡片中部空白 */}
           <div className="my-3 flex flex-1 flex-col justify-center">
             <YubaoEnergy />
           </div>

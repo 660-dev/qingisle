@@ -40,7 +40,7 @@ export function Hero() {
             <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-primary/35 bg-primary/15 backdrop-blur-md">
               <Leaf className="h-5 w-5 text-primary" weight="fill" />
             </span>
-            <span className="text-[15px] tracking-wide">Summer Checkin</span>
+            <span className="text-[15px] tracking-wide">青屿</span>
           </Link>
         <div className="flex items-center gap-3">
           <GithubLink />
@@ -63,15 +63,15 @@ export function Hero() {
             />
           </div>
 
-          {/* 主标题 — 双色：Summer 白 / Checkin 主题绿 */}
+          {/* 主标题 — 双色：Qing 白 / Isle 主题绿 */}
           <h1 className="text-[44px] font-bold leading-[1.02] tracking-tight sm:text-5xl md:text-7xl lg:text-[88px]">
-            <span>Summer </span>
-            <span className="text-primary">Checkin</span>
+            <span>Qing</span>
+            <span className="text-primary">Isle</span>
           </h1>
 
           {/* 副标题 — VariableProximity 互动字体 */}
           <VariableProximity
-            label="把每一次专注留在风景里。制定计划、完成打卡、观察成长，让 AI 帮你把这个夏天变成一段清晰可见的进步。"
+            label="制定计划、完成打卡、看清趋势。让 AI 帮你把零散学习，收成一条稳定的成长曲线。"
             fromFontVariationSettings="'wght' 400"
             toFontVariationSettings="'wght' 700"
             containerRef={heroRef}

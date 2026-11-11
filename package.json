@@ -1,5 +1,5 @@
 {
-  "name": "summer-checkin",
+  "name": "qingisle",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "ws:dev": "tsx server/index.ts"
+    "ws:dev": "tsx server/index.ts",
+    "ws:py": "python python-backend/run.py"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.11",

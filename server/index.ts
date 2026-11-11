@@ -165,7 +165,7 @@ async function handleUserMessage(conn: Connection, msg: { clientId: string; cont
 
   broadcast({ type: "message", message: toDTO(saved, userName, image, replyTo) });
 
-  // @AI 触发（传 userId，聊天室按用户记账 + 每日限额）；一条消息可同时 @温柔宝 + @嘴欠宝，各自流式
+  // @AI 触发（传 userId，聊天室按用户记账 + 每日限额）；一条消息可同时 @青青 + @屿屿，各自流式
   for (const ai of extractAIPrompts(content)) {
     void handleAI(ai.prompt, conn.userId ?? undefined, ai.aiRole, replyTo, userName);
   }
@@ -186,12 +186,12 @@ function checkRateLimit(conn: Connection): boolean {
 }
 
 function extractAIPrompts(content: string): { prompt: string; aiRole: AiRole }[] {
-  // @温柔宝 → 温柔宝；@雨宝 / @嘴欠宝 / @AI → 嘴欠宝；/ai 是命令式，仍要求开头（避免命中 /api 之类）
+  // @青青 → 青青；@屿助手 / @屿屿 / @AI → 屿屿；/ai 是命令式，仍要求开头（避免命中 /api 之类）
   const results: { prompt: string; aiRole: AiRole }[] = [];
-  const re = /@温柔宝|@嘴欠宝|@雨宝|@AI|^\s*\/ai(?=\s|$)/gi;
+  const re = /@青青|@屿屿|@屿助手|@AI|^\s*\/ai(?=\s|$)/gi;
   let m: RegExpExecArray | null;
   while ((m = re.exec(content)) !== null) {
-    const aiRole: AiRole = m[0].toLowerCase().includes("温柔") ? "gentle" : "snarky";
+    const aiRole: AiRole = m[0].toLowerCase().includes("青青") ? "gentle" : "snarky";
     // 优先取提及之后的文字作为提问
     const after = content.slice(m.index + m[0].length).replace(/^\s+/, "").trim();
     const prompt = after || content.slice(0, m.index).trim() || null;

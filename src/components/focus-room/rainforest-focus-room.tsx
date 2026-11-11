@@ -14,7 +14,6 @@ export function RainforestFocusRoom() {
   const { roomTitle, roomSlogan } = useSceneCopy();
   const [quote, setQuote] = useState(() => randomQuote(scene));
 
-  // 挂到 body 上复用 .rainforest-immersive 规则：隐藏顶部导航 / 悬浮球 / 环境音，并锁定滚动
   useEffect(() => {
     if (immersive) document.body.classList.add("rainforest-immersive");
     else document.body.classList.remove("rainforest-immersive");
@@ -23,55 +22,58 @@ export function RainforestFocusRoom() {
 
   function enterImmersive() {
     setQuote(randomQuote(scene));
-    // 沉浸覆盖层是透明的，进入前先让当前输入框失焦，避免页面光标的闪烁透过覆盖层显示
     if (typeof document !== "undefined") {
       (document.activeElement as HTMLElement | null)?.blur?.();
     }
     setImmersive(true);
   }
 
-  if (immersive) {
-    return (
-      <div className="fixed inset-0 z-[60] flex select-none flex-col items-center justify-center px-6">
-        <PomodoroStation immersive />
-        <p className="mt-10 max-w-md cursor-default text-center text-sm font-light leading-relaxed tracking-wide text-primary/55">
-          「{quote}」
-        </p>
-        <LongPressExit onExit={() => setImmersive(false)} />
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-1 flex-col px-6 pt-8">
-      {/* 标题 */}
-      <header className="product-header shrink-0">
-        <div>
-          <p className="product-eyebrow">Deep focus</p>
-          <h1 className="product-title">{roomTitle}</h1>
-          <p className="product-subtitle">{roomSlogan}</p>
-        </div>
-        <button
-          type="button"
-          data-tour="focus-immersive"
-          onClick={enterImmersive}
-          className="flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition hover:scale-[1.03] hover:bg-primary/90 active:scale-95"
-        >
-          <ArrowsOut className="size-4" weight="bold" />
-          沉浸模式
-        </button>
-      </header>
+    <div
+      className={
+        immersive
+          ? "fixed inset-0 z-[60] flex select-none flex-col items-center justify-center px-6"
+          : "flex flex-1 flex-col px-6 pt-8"
+      }
+    >
+      {!immersive ? (
+        <header className="product-header shrink-0">
+          <div>
+            <p className="product-eyebrow">Deep focus</p>
+            <h1 className="product-title">{roomTitle}</h1>
+            <p className="product-subtitle">{roomSlogan}</p>
+          </div>
+          <button
+            type="button"
+            data-tour="focus-immersive"
+            onClick={enterImmersive}
+            className="flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition hover:scale-[1.03] hover:bg-primary/90 active:scale-95"
+          >
+            <ArrowsOut className="size-4" weight="bold" />
+            沉浸模式
+          </button>
+        </header>
+      ) : null}
 
-      {/* 三栏：番茄钟 | 背景 | 待办 */}
-      <div className="flex flex-1 items-center gap-0">
-        <div className="flex w-1/4 shrink-0 items-center px-2">
-          <PomodoroStation onStart={enterImmersive} />
+      <div className={immersive ? "flex flex-col items-center" : "flex flex-1 items-center gap-0"}>
+        <div className={immersive ? "" : "flex w-1/4 shrink-0 items-center px-2"}>
+          <PomodoroStation immersive={immersive} onStart={enterImmersive} />
         </div>
-        <div className="flex-1" />
-        <div className="w-1/5 shrink-0 px-2">
-          <LocalTodoPanel />
-        </div>
+        {!immersive ? (
+          <>
+            <div className="flex-1" />
+            <div className="w-1/5 shrink-0 px-2">
+              <LocalTodoPanel />
+            </div>
+          </>
+        ) : (
+          <p className="mt-10 max-w-md cursor-default text-center text-sm font-light leading-relaxed tracking-wide text-primary/55">
+            「{quote}」
+          </p>
+        )}
       </div>
+
+      {immersive ? <LongPressExit onExit={() => setImmersive(false)} /> : null}
     </div>
   );
 }

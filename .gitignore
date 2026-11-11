@@ -81,6 +81,15 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+.venv/
+**/.venv/
+
+# 本地一次性补丁 / 转储脚本（含本机绝对路径与开发库口令，不纳入版本控制）
+*.hex
+patch_env.py
+scripts/rebrand_qingisle.py
+scripts/install_weekly.py
+scripts/start-local.ps1
 
 # Docker
 docker-compose.override.yml

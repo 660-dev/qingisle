@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { nextCookies } from "better-auth/next-js";
 import { prisma } from "@/lib/prisma";
 import { cloneGuideTemplates } from "@/lib/onboard";
 
@@ -9,8 +10,8 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    minPasswordLength: 8,
   },
-  // 新用户注册瞬间，把引导模板（通关计划 + 引导文档）克隆到该用户名下
   databaseHooks: {
     user: {
       create: {
@@ -18,8 +19,7 @@ export const auth = betterAuth({
           try {
             await cloneGuideTemplates(user.id);
           } catch (e) {
-            // 克隆失败不抛错，保证注册流程不被影响
-            console.error("[onboard] 克隆引导模板失败:", e);
+            console.error("[onboard] clone guide failed:", e);
           }
         },
       },
@@ -27,15 +27,25 @@ export const auth = betterAuth({
   },
   session: {
     cookieCache: {
-      enabled: true,
-      maxAge: 5 * 60, // 5分钟，避免跨标签页缓存不一致
+      enabled: false,
+    },
+  },
+  advanced: {
+    useSecureCookies: false,
+    defaultCookieAttributes: {
+      sameSite: "lax",
+      secure: false,
+      path: "/",
     },
   },
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:3001",
     "http://localhost:3002",
-    // 生产环境: 通过环境变量动态注入
+    "http://localhost:3100",
+    "http://127.0.0.1:3100",
+    "http://127.0.0.1:3000",
     process.env.BETTER_AUTH_URL ?? "",
   ].filter(Boolean),
+  plugins: [nextCookies()],
 });
