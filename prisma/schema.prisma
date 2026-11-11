@@ -439,7 +439,7 @@ model ChatMessage {
   userId    String?
   role      String   @default("user")
   content   String
-  /** 聊天室 AI 角色（青青/屿屿）；AI 消息用于区分，让上下文标注不串风格 */
+  /** 聊天室 AI 角色（小序/阿序）；AI 消息用于区分，让上下文标注不串风格 */
   aiRole    String?
   /** 引用回复：被引用的消息 id（无 = 普通消息） */
   replyToId String?

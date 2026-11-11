@@ -820,7 +820,7 @@ export type $ChatMessagePayload<ExtArgs extends runtime.Types.Extensions.Interna
     role: string
     content: string
     /**
-     * * 聊天室 AI 角色（青青/屿屿）；AI 消息用于区分，让上下文标注不串风格
+     * * 聊天室 AI 角色（小序/阿序）；AI 消息用于区分，让上下文标注不串风格
      */
     aiRole: string | null
     /**

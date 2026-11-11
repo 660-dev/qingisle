@@ -40,7 +40,7 @@ export function Hero() {
             <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-primary/35 bg-primary/15 backdrop-blur-md">
               <Leaf className="h-5 w-5 text-primary" weight="fill" />
             </span>
-            <span className="text-[15px] tracking-wide">青屿</span>
+            <span className="text-[15px] tracking-wide">知序</span>
           </Link>
         <div className="flex items-center gap-3">
           <GithubLink />
@@ -63,10 +63,10 @@ export function Hero() {
             />
           </div>
 
-          {/* 主标题 — 双色：Qing 白 / Isle 主题绿 */}
+          {/* 主标题 — 双色：知 白 / 序 主题绿 */}
           <h1 className="text-[44px] font-bold leading-[1.02] tracking-tight sm:text-5xl md:text-7xl lg:text-[88px]">
-            <span>Qing</span>
-            <span className="text-primary">Isle</span>
+            <span>知</span>
+            <span className="text-primary">序</span>
           </h1>
 
           {/* 副标题 — VariableProximity 互动字体 */}

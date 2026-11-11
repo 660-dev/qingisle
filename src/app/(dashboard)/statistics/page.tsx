@@ -147,7 +147,7 @@ export default async function ProfilePage() {
             <span className="text-xs font-medium text-white/72">今日动态</span>
             {todayDone > 0 ? <CheckCircle className="size-5 text-primary" weight="fill" /> : <Star className="size-5 text-primary" weight="duotone" />}
           </div>
-          {/* 屿助手精力条：填满卡片中部空白 */}
+          {/* 序助手精力条：填满卡片中部空白 */}
           <div className="my-3 flex flex-1 flex-col justify-center">
             <YubaoEnergy />
           </div>

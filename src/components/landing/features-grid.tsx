@@ -40,7 +40,7 @@ export function FeaturesGrid() {
             <h2 className="mt-3 text-3xl font-semibold leading-tight md:text-5xl">少一点切换，<br />多一点真正的<span className="text-primary">专注</span></h2>
           </div>
           <p className="max-w-2xl text-base leading-relaxed text-white/58 md:text-lg">
-            计划不是孤立的清单。屿助手会读懂你的目标和进度，把任务、专注记录、学习资料与每日复盘连接起来。
+            计划不是孤立的清单。序助手会读懂你的目标和进度，把任务、专注记录、学习资料与每日复盘连接起来。
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export function FeaturesGrid() {
             <aside className="border-t border-white/10 bg-black/10 p-5 sm:p-6 lg:border-l lg:border-t-0">
               <div className="flex items-center gap-3">
                 <span className="flex size-9 items-center justify-center rounded-full bg-primary/14 text-primary"><Brain className="size-5" weight="duotone" /></span>
-                <div><p className="text-sm font-medium">屿助手</p><p className="text-[10px] text-white/34">AI 学习伙伴 · 在线</p></div>
+                <div><p className="text-sm font-medium">序助手</p><p className="text-[10px] text-white/34">AI 学习伙伴 · 在线</p></div>
                 <Sparkle className="ml-auto size-4 text-primary" weight="fill" />
               </div>
               <div className="mt-7 text-sm leading-6 text-white/62">
@@ -121,7 +121,7 @@ export function FeaturesGrid() {
                 </div>
               </div>
               <div className="mt-10 flex h-11 items-center gap-3 border border-white/12 bg-white/[0.035] px-3">
-                <span className="flex-1 text-xs text-white/28">问问屿助手下一步做什么…</span>
+                <span className="flex-1 text-xs text-white/28">问问序助手下一步做什么…</span>
                 <PaperPlaneTilt className="size-4 text-primary" weight="fill" />
               </div>
             </aside>

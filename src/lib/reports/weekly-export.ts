@@ -46,7 +46,7 @@ export async function buildWeeklyExport(userId: string, userName?: string | null
   const generated = formatReportAsMarkdown(report);
 
   const extra = [
-    `# 青屿周报`,
+    `# 知序周报`,
     ``,
     `导出时间：${new Date().toISOString().slice(0, 16).replace("T", " ")}`,
     `学习者：${userName || "同学"}`,
@@ -79,7 +79,7 @@ export async function buildWeeklyExport(userId: string, userName?: string | null
       : ["- 本周还没有完成任务"]),
     ``,
     `---`,
-    `由青屿 QingIsle 导出。`,
+    `由知序 Zhixu 导出。`,
   ].join("\n");
 
   return {

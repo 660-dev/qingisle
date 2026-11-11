@@ -8,7 +8,7 @@ import { SceneProvider } from "@/context/scene-context";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "青屿 QingIsle - 智能学习打卡平台",
+  title: "知序 Zhixu - 智能学习打卡平台",
   description: "用打卡、计划、专注和 AI，把学习节奏做成看得见的岛屿。",
 };
 

@@ -98,9 +98,9 @@ def check_rate(conn: Connection) -> bool:
 
 def extract_ai(content: str) -> list[dict]:
     results = []
-    for m in re.finditer(r"@青青|@屿屿|@屿助手|@AI|^\s*/ai(?=\s|$)", content, flags=re.I | re.M):
+    for m in re.finditer(r"@小序|@阿序|@序助手|@AI|^\s*/ai(?=\s|$)", content, flags=re.I | re.M):
         token = m.group(0)
-        role = "gentle" if "青青" in token else "snarky"
+        role = "gentle" if "小序" in token else "snarky"
         after = content[m.end():].strip()
         prompt = after or content[: m.start()].strip()
         if prompt:

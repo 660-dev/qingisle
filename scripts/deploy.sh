@@ -2,7 +2,7 @@
 set -e
 
 # ============================================================
-# 青屿 — 部署脚本（tar 导出上传，阿里云 ECS）
+# 知序 — 部署脚本（tar 导出上传，阿里云 ECS）
 # 用法: ./scripts/deploy.sh [镜像标签]
 # 示例: ./scripts/deploy.sh v1.0.0
 #
@@ -15,7 +15,7 @@ VERSION="${1:-latest}"
 ECS_HOST="${ECS_HOST:-8.163.59.196}"
 ECS_USER="${ECS_USER:-root}"
 
-echo "=== 青屿 部署 (版本: $VERSION → $ECS_USER@$ECS_HOST) ==="
+echo "=== 知序 部署 (版本: $VERSION → $ECS_USER@$ECS_HOST) ==="
 
 # 构建镜像
 echo "[1/4] 构建 Docker 镜像..."

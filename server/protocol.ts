@@ -6,7 +6,7 @@
 
 export type MessageRole = "user" | "assistant" | "system";
 
-/** 聊天室 AI 角色：青青 / 屿屿 */
+/** 聊天室 AI 角色：小序 / 阿序 */
 export type AiRole = "gentle" | "snarky";
 
 // ---- 客户端 → 服务端 ----

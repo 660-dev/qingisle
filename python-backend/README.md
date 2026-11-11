@@ -9,7 +9,7 @@
 已替换：
 - 实时聊天 WebSocket
 - Better Auth 会话 cookie 查库
-- @青青 / @屿屿 / @屿助手 / @AI 流式回复
+- @小序 / @阿序 / @序助手 / @AI 流式回复
 - 引用回复、限流、心跳由 Uvicorn/WebSocket 保活
 
 未整仓翻译（仍在 Next.js `/api`）：

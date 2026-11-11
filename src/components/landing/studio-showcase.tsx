@@ -45,7 +45,7 @@ export function StudioShowcase() {
               就是你的<span className="text-primary">知识花园</span>
             </h2>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-white/56">
-              青屿 内置完整的 Markdown 阅读器与编辑器，支持代码高亮、数学公式、
+              知序 内置完整的 Markdown 阅读器与编辑器，支持代码高亮、数学公式、
               表格、任务列表。框选任意文字，直接让 AI 帮你解释、总结或改写。
             </p>
 

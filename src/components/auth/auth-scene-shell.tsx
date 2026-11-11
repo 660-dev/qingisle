@@ -62,21 +62,21 @@ const SCENE_HERO_COPY: Record<
   rain: {
     eyebrow: "雨林 · 你的学习栖息地",
     title: ["让每一次专注", "都留下生长的痕迹"],
-    slogan: "计划、专注、打卡，与 AI 伙伴屿助手协作，在安静的森林里完成每一天的学习。",
+    slogan: "计划、专注、打卡，与 AI 伙伴序助手协作，在安静的森林里完成每一天的学习。",
     mutedA: "数据只属于你",
     mutedB: "看见持续的进步",
   },
   snow: {
     eyebrow: "雪日 · 你的安静自习室",
     title: ["让每一次专注", "都安静而坚定"],
-    slogan: "在雪落中入定，与 AI 伙伴屿助手一起，按自己的节奏推进计划和打卡。",
+    slogan: "在雪落中入定，与 AI 伙伴序助手一起，按自己的节奏推进计划和打卡。",
     mutedA: "数据只属于你",
     mutedB: "看见持续的进步",
   },
   cloud: {
     eyebrow: "暖云 · 你的柔软自习室",
     title: ["让每一次专注", "都柔软而悠长"],
-    slogan: "在云影里舒展，与 AI 伙伴屿助手一起，把计划、记录、专注都做得更松弛一点。",
+    slogan: "在云影里舒展，与 AI 伙伴序助手一起，把计划、记录、专注都做得更松弛一点。",
     mutedA: "数据只属于你",
     mutedB: "看见持续的进步",
   },
@@ -205,7 +205,7 @@ export function AuthSceneShell({ children }: { children: React.ReactNode }) {
           <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Leaf className="size-4" weight="fill" />
           </span>
-          青屿
+          知序
         </Link>
 
         {/* 表单容器 */}

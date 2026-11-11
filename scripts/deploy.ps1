@@ -1,5 +1,5 @@
 # ============================================================
-# 青屿 — Windows 本地部署脚本 (PowerShell)
+# 知序 — Windows 本地部署脚本 (PowerShell)
 # 用法:
 #   本地构建并导出 tar:  .\scripts\deploy.ps1 -Version "v1.0.0"
 #   上传到 ECS:          .\scripts\deploy.ps1 -Version "v1.0.0" -ServerIP "你的ECS公网IP"
@@ -15,7 +15,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "=== 青屿 部署 (版本: $Version) ===" -ForegroundColor Cyan
+Write-Host "=== 知序 部署 (版本: $Version) ===" -ForegroundColor Cyan
 
 # 1. 构建镜像
 Write-Host ""

@@ -1,8 +1,8 @@
-> 本仓库是 **青屿 QingIsle**，基于开源项目 https://github.com/gdut4140/summer-checkin 二次开发（原项目 MIT 协议，见 [LICENSE](./LICENSE)，保留原作者版权声明）。演示：https://YOUR_DEMO_URL
+> 本仓库是 **知序 Zhixu**，基于开源项目 https://github.com/gdut4140/summer-checkin 二次开发（原项目 MIT 协议，见 [LICENSE](./LICENSE)，保留原作者版权声明）。演示：https://YOUR_DEMO_URL
 
 <h1 align="center">
-  <span style="color:#ffffff;">Qing</span>
-  <span style="color:#d7ef83;">Isle</span>
+  <span style="color:#ffffff;">知</span>
+  <span style="color:#d7ef83;">序</span>
 </h1>
 
 <p align="center">
@@ -54,7 +54,7 @@
 
 > 原项目来源：https://github.com/gdut4140/summer-checkin （MIT）。以下为本仓库在其基础上的改动。
 
-- **品牌更名**：产品更名为「青屿 QingIsle」，落地页、导航、浏览器标题与主要文案同步替换；AI 伙伴更名为「青青 / 屿屿 / 屿助手」。品牌名集中配置在 `src/config/brand.ts`。
+- **品牌更名**：产品更名为「知序 Zhixu」，落地页、导航、浏览器标题与主要文案同步替换；AI 伙伴更名为「小序 / 阿序 / 序助手」。品牌名集中配置在 `src/config/brand.ts`。
 - **聊天室后端新增 Python 实现**：在保留原 Node sidecar（`server/`）的同时，新增 Python FastAPI 服务 `python-backend/`，可独立替代聊天室 WebSocket 进程（替代范围见下节）。
 - **新增周报导出**：统计页「周报导出」按钮，按周聚合打卡 / 专注 / 完成任务并结合 Agent 周报生成逻辑，导出 Markdown（接口 `src/app/api/reports/weekly/route.ts`，实现 `src/lib/reports/weekly-export.ts`）。
 - **登录接入 Server Action**：登录表单通过 `src/app/(auth)/actions.ts` 调用 Better Auth 完成。
@@ -66,7 +66,7 @@
 **已由 Python 承接：**
 - 实时聊天 WebSocket 连接与在线状态广播
 - Better Auth 会话 cookie 查库鉴权
-- `@青青 / @屿屿 / @屿助手 / @AI` 流式回复
+- `@小序 / @阿序 / @序助手 / @AI` 流式回复
 - 引用回复、消息限流、心跳保活与断线清理
 
 **尚未迁移、仍在 Next.js `/api` 中实现：**
@@ -114,7 +114,7 @@
 ### 💬 多人聊天室
 - WebSocket 实时群聊：所有在线用户共享一条消息流，在线人数实时广播
 - **引用回复**：对任意消息回复，对方收到「某某某回复了你」的滚动感知提醒
-- `@AI` 唤起 AI 伙伴流式回复，内置「青青」「屿屿」等人格，支持 Markdown 与代码高亮
+- `@AI` 唤起 AI 伙伴流式回复，内置「小序」「阿序」等人格，支持 Markdown 与代码高亮
 - WebSocket 为独立 sidecar 进程，握手期 Cookie 鉴权，心跳保活 + 断线清理
 - AI 以虚拟用户身份入群，读取最近群聊上下文后流式回推，模型池 LOW 档自动降级并做 token 记账 / 限流
 - sidecar 有两套可互换实现：Node（`server/`）与 Python FastAPI（`python-backend/`）

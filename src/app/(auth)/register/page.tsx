@@ -17,7 +17,7 @@ export default function RegisterPage() {
         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           <Sparkle className="size-4" weight="fill" />
         </span>
-        青屿
+        知序
       </Link>
 
       <div className="mb-8">
